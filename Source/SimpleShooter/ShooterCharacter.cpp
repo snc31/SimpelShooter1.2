@@ -75,6 +75,10 @@ float AShooterCharacter::GetHealthPercent() const
 	return Health / MaxHealth;
 }
 
+float AShooterCharacter::GetCautionBarPercent() const
+{
+	return CautionBarValue / MaxCautionBarValue;
+}
 
 // Called every frame
 void AShooterCharacter::Tick(float DeltaTime)
@@ -117,5 +121,3 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 
 	return DamageToApply;
 }
-
-
