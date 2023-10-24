@@ -4,6 +4,7 @@
 #include "ShooterCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/WidgetComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
 #include "Gun.h"
@@ -37,6 +38,8 @@ void AShooterCharacter::BeginPlay()
 	Gun->SetOwner(this);
 
 	Health = MaxHealth;
+	
+	CauitonBarRef = Cast<UWidgetComponent>(this->GetComponentByClass(TSubclassOf<UActorComponent>()));
 }
 
 void AShooterCharacter::Move(const FInputActionValue& Value)

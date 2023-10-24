@@ -22,5 +22,5 @@ protected:
 
 private:
 	void ShowCautionBar(UBehaviorTreeComponent& OwnerComp);
-	UUserWidget* CautionBarWidgetRef;
+	class UWidgetComponent* CautionBarWidgetRef;
 };

@@ -68,6 +68,8 @@ public:
 
 	void Shoot();
 
+	class UWidgetComponent* CauitonBarRef;
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
@@ -86,4 +88,5 @@ private:
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
 	float MaxCautionBarValue;
+
 };
