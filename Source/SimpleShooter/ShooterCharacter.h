@@ -89,4 +89,6 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
 	float MaxCautionBarValue;
 
+	UPROPERTY(VisibleAnywhere)
+	UWidgetComponent* CautionBarWidget;
 };

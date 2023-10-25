@@ -25,13 +25,11 @@ void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& Ow
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
-	CautionBarWidgetRef = Cast<UWidgetComponent>(ControlledCharacter->GetDefaultSubobjectByName(TEXT("CautionBarWidget"))); //RETURNING NULLPTR
-	
-	{
+	CautionBarWidgetRef = Cast<UWidgetComponent>(ControlledCharacter->GetCapsuleComponent()->GetDefaultSubobjectByName("Caution Bar Widget"));
 
-	};
 	if (CautionBarWidgetRef != nullptr)
 	{
-		CautionBarWidgetRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Visible);
+		UUserWidget* w = CautionBarWidgetRef->GetUserWidgetObject();
+		w->SetVisibility(ESlateVisibility::Visible);
 	}
 }
