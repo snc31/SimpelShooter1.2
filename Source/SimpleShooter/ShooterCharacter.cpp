@@ -39,7 +39,7 @@ void AShooterCharacter::BeginPlay()
 
 	Health = MaxHealth;
 	
-	CauitonBarRef = Cast<UWidgetComponent>(this->GetComponentByClass(TSubclassOf<UActorComponent>()));
+	//CauitonBarRef = Cast<UWidgetComponent>(this->GetComponentByClass(TSubclassOf<UActorComponent>()));
 }
 
 void AShooterCharacter::Move(const FInputActionValue& Value)

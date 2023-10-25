@@ -23,4 +23,5 @@ protected:
 private:
 	void ShowCautionBar(UBehaviorTreeComponent& OwnerComp);
 	class UWidgetComponent* CautionBarWidgetRef;
+	TArray<USceneComponent>* AIComponents;
 };

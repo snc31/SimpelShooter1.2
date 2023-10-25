@@ -5,6 +5,7 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/SceneComponent.h"
 #include "Components/WidgetComponent.h"
 #include "ShooterAIController.h"
 #include "ShooterCharacter.h"
@@ -24,8 +25,11 @@ void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& Ow
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
-	UCapsuleComponent* CP = ControlledCharacter->GetCapsuleComponent();
 	CautionBarWidgetRef = Cast<UWidgetComponent>(ControlledCharacter->GetDefaultSubobjectByName(TEXT("CautionBarWidget"))); //RETURNING NULLPTR
+	
+	{
+
+	};
 	if (CautionBarWidgetRef != nullptr)
 	{
 		CautionBarWidgetRef->GetUserWidgetObject()->SetVisibility(ESlateVisibility::Visible);
