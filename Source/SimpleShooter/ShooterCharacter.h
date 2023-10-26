@@ -70,6 +70,15 @@ public:
 
 	class UWidgetComponent* CauitonBarRef;
 
+	UPROPERTY(VisibleAnywhere)
+	UWidgetComponent* CautionBarWidget;
+
+	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
+	float CautionBarValue;
+
+	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
+	float MaxCautionBarValue;
+
 private:
 	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AGun> GunClass;
@@ -82,13 +91,4 @@ private:
 
 	UPROPERTY(VisibleAnywhere)
 	float Health;
-
-	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float CautionBarValue;
-
-	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float MaxCautionBarValue;
-
-	UPROPERTY(VisibleAnywhere)
-	UWidgetComponent* CautionBarWidget;
 };

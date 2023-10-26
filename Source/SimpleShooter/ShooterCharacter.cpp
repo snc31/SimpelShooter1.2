@@ -40,8 +40,6 @@ void AShooterCharacter::BeginPlay()
 	Gun->SetOwner(this);
 
 	Health = MaxHealth;
-	
-	//CauitonBarRef = Cast<UWidgetComponent>(this->GetComponentByClass(TSubclassOf<UActorComponent>()));
 }
 
 void AShooterCharacter::Move(const FInputActionValue& Value)
