@@ -80,7 +80,7 @@ float AShooterCharacter::GetHealthPercent() const
 
 float AShooterCharacter::GetCautionBarPercent() const
 {
-	return CautionBarValue;
+	return CautionBarValue/MaxCautionBarValue;
 }
 
 // Called every frame

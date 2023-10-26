@@ -18,6 +18,7 @@ UBTTask_ShowAndIcreaseCautionBar::UBTTask_ShowAndIcreaseCautionBar()
 EBTNodeResult::Type UBTTask_ShowAndIcreaseCautionBar::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	ShowCautionBar(OwnerComp);
+	IncreaseCautionBarValue(OwnerComp);
 	return EBTNodeResult::InProgress;
 }
 
@@ -31,4 +32,21 @@ void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& Ow
 	{
 		CautionBarWidgetRef->SetHiddenInGame(false);
 	}
+}
+
+void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComponent& OwnerComp)
+{
+	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
+	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
+	float CautionBarPercent = ControlledCharacter->CautionBarValue;
+	if (CautionBarPercent < ControlledCharacter->MaxCautionBarValue)
+	{
+		CautionBarPercent++;
+		//Needs to increment over time //FTimerHandle
+	}
+	//else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)
+	//{
+	//	//Change Caution Bar to red
+	//}
+	//decrease if can't see player
 }

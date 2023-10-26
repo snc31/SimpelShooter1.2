@@ -68,16 +68,14 @@ public:
 
 	void Shoot();
 
-	class UWidgetComponent* CauitonBarRef;
-
 	UPROPERTY(VisibleAnywhere)
-	UWidgetComponent* CautionBarWidget;
+	class UWidgetComponent* CautionBarWidget;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float CautionBarValue;
+	float CautionBarValue = 0.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float MaxCautionBarValue;
+	float MaxCautionBarValue = 100.f;
 
 private:
 	UPROPERTY(EditDefaultsOnly)
