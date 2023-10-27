@@ -9,6 +9,7 @@
 #include "Components/WidgetComponent.h"
 #include "ShooterAIController.h"
 #include "ShooterCharacter.h"
+#include "TimerManager.h"
 
 UBTTask_ShowAndIcreaseCautionBar::UBTTask_ShowAndIcreaseCautionBar()
 {
@@ -19,7 +20,7 @@ EBTNodeResult::Type UBTTask_ShowAndIcreaseCautionBar::ExecuteTask(UBehaviorTreeC
 {
 	ShowCautionBar(OwnerComp);
 	IncreaseCautionBarValue(OwnerComp);
-	return EBTNodeResult::InProgress;
+	return EBTNodeResult::Succeeded;
 }
 
 void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& OwnerComp)
@@ -41,7 +42,8 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 	float CautionBarPercent = ControlledCharacter->CautionBarValue;
 	if (CautionBarPercent < ControlledCharacter->MaxCautionBarValue)
 	{
-		CautionBarPercent++;
+		ControlledCharacter->CautionBarValue++;
+		//GetWorld()->GetTimerManager().SetTimer(FTimerHandle* time = 0.01,);
 		//Needs to increment over time //FTimerHandle
 	}
 	//else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)

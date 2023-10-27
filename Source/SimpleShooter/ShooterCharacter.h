@@ -72,7 +72,7 @@ public:
 	class UWidgetComponent* CautionBarWidget;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float CautionBarValue = 0.f;
+	float CautionBarValue = 1.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
 	float MaxCautionBarValue = 100.f;
