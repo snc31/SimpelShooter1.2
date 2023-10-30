@@ -42,7 +42,8 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 	float CautionBarPercent = ControlledCharacter->CautionBarValue;
 	if (CautionBarPercent < ControlledCharacter->MaxCautionBarValue)
 	{
-		ControlledCharacter->CautionBarValue++;
+		//GetWorld()->GetTimerManager().SetTimer(TimerHandle, this);
+		ControlledCharacter->CautionBarValue = ControlledCharacter->CautionBarValue++;
 		//GetWorld()->GetTimerManager().SetTimer(FTimerHandle* time = 0.01,);
 		//Needs to increment over time //FTimerHandle
 	}

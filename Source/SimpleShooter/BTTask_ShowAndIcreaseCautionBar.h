@@ -25,4 +25,5 @@ private:
 	void IncreaseCautionBarValue(UBehaviorTreeComponent& OwnerComp);
 	class UWidgetComponent* CautionBarWidgetRef;
 	TArray<USceneComponent>* AIComponents;
+	//class FTimerHandle* TimerHandle;
 };
