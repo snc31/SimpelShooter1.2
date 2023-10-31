@@ -47,9 +47,11 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 		//GetWorld()->GetTimerManager().SetTimer(FTimerHandle* time = 0.01,);
 		//Needs to increment over time //FTimerHandle
 	}
-	//else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)
-	//{
-	//	//Change Caution Bar to red
-	//}
+	else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)
+	{
+		//Change Caution Bar to red
+		//Set Blackboard value to true so can change to next state (may need to create the blackboard key)
+		//OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true);
+	}
 	//decrease if can't see player
 }
