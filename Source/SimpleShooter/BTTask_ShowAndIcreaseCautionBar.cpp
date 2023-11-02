@@ -2,11 +2,14 @@
 
 
 #include "BTTask_ShowAndIcreaseCautionBar.h"
+#include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BTTaskNode.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/SceneComponent.h"
 #include "Components/WidgetComponent.h"
+#include "Engine/World.h"
+#include "GameFramework/Actor.h"
 #include "ShooterAIController.h"
 #include "ShooterCharacter.h"
 #include "TimerManager.h"
@@ -42,16 +45,17 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 	float CautionBarPercent = ControlledCharacter->CautionBarValue;
 	if (CautionBarPercent < ControlledCharacter->MaxCautionBarValue)
 	{
-		//GetWorld()->GetTimerManager().SetTimer(TimerHandle, this);
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, 0.2f, false, 0.2f);
 		ControlledCharacter->CautionBarValue = ControlledCharacter->CautionBarValue++;
-		//GetWorld()->GetTimerManager().SetTimer(FTimerHandle* time = 0.01,);
+		UE_LOG(LogTemp, Warning, TEXT("Caution Bar Value: %f"), ControlledCharacter->CautionBarValue);
 		//Needs to increment over time //FTimerHandle
 	}
 	else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)
 	{
 		//Change Caution Bar to red
-		//Set Blackboard value to true so can change to next state (may need to create the blackboard key)
-		//OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true);
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true);
 	}
 	//decrease if can't see player
+
+	//Remove caution bar from screen if AI dead
 }

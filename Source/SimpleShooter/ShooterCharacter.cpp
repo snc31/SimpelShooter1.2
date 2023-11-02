@@ -80,14 +80,13 @@ float AShooterCharacter::GetHealthPercent() const
 
 float AShooterCharacter::GetCautionBarPercent() const
 {
-	return CautionBarValue;
+	return CautionBarValue / MaxCautionBarValue;
 }
 
 // Called every frame
 void AShooterCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 // Called to bind functionality to input
