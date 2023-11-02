@@ -50,7 +50,9 @@ public:
 	float GetHealthPercent() const;
 
 	UFUNCTION(BlueprintPure)
-	float GetCautionBarPercent() const;
+	float GetCautionBarPercent();
+
+	float IncreaseCautionBarValue();
 
 	UPROPERTY(EditAnywhere, Category = TargetPoints)
 	TArray<AActor*> TargetPoints; //Array of target points for the AI enemies to have listed. 
@@ -72,7 +74,7 @@ public:
 	class UWidgetComponent* CautionBarWidget;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float CautionBarValue = 1.f;
+	float CautionBarValue = 0.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
 	float MaxCautionBarValue = 100.f;
