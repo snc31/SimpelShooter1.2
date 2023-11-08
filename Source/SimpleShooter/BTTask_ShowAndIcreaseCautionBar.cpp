@@ -6,6 +6,7 @@
 #include "BehaviorTree/BTTaskNode.h"
 #include "Blueprint/UserWidget.h"
 #include "CautionBarWidget.h"
+#include "Components/ProgressBar.h"
 #include "Components/SceneComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Engine/World.h"
@@ -44,24 +45,25 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
-	float CautionBarPercent = ControlledCharacter->GetCautionBarPercent();
+	float CautionBarPercent = ControlledCharacter->GetCautionBarPercent(); //Store the float percent that is returned from shootercharacter.cpp
+	CautionBarWidgetComponentRef = ControlledCharacter->CautionBarWidget; //Get a reference to the widget component
+	CautionBarWidgetRef = Cast<UCautionBarWidget>(CautionBarWidgetComponentRef->GetWidget()); //Get a reference tot he widget on the widget component
 
 	if (ControlledCharacter->CautionBarValue < ControlledCharacter->MaxCautionBarValue)
 	{
-		GetWorld()->GetTimerManager().SetTimer(TimerHandle, 0.2f, false, 0.2f);
-		ControlledCharacter->IncreaseCautionBarValue();
-		CautionBarWidgetComponentRef = ControlledCharacter->CautionBarWidget;
-		CautionBarWidgetRef = Cast<UCautionBarWidget>(CautionBarWidgetComponentRef->GetWidget());
-		CautionBarWidgetRef->SetCautionBarPercent();
-		UE_LOG(LogTemp, Warning, TEXT("Caution Bar Value: %f"), ControlledCharacter->IncreaseCautionBarValue())
+		//GetWorld()->GetTimerManager().SetTimer(TimerHandle, 0.2f, false, 0.2f); //Timer between every percent increase
+		ControlledCharacter->IncreaseCautionBarValue(); //Increase the float value CautionBarValue which in ShooterCharacter
+		CautionBarWidgetRef->CautionBar->SetPercent(CautionBarPercent); //Set the progressbar value to the percent value
 	}
 	else if (ControlledCharacter->CautionBarValue >= ControlledCharacter->MaxCautionBarValue)
 	{
-		//Make caution bar red
-		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true);
+		CautionBarWidgetRef->CautionBar->SetFillColorAndOpacity(FColor::Red); //Set Caution bar progress bar to red
+		//GetWorld()->GetTimerManager().SetTimer(TimerHandle, 20.f, false, 20.f); //wait time before removing caution bar from screen
+		CautionBarWidgetComponentRef->SetHiddenInGame(true); //Hide caution bar from view
+		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true); //set balckboard key IsCautionBarFull? to true
 	}
 }
-	//Decrease if can't see player
+	//Decrease if can't see player and under max cuation bar value
 
 	//Hide if bar reaches 0
 

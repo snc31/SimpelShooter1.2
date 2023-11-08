@@ -2,11 +2,11 @@
 
 
 #include "CautionBarWidget.h"
-#include "ShooterCharacter.h"
+//#include "ShooterCharacter.h"
 #include "Components/ProgressBar.h"
 
-void UCautionBarWidget::SetCautionBarPercent()
-{
-	ShooterCharacterRef = Cast<AShooterCharacter>(this->GetOwningPlayer()->GetPawn());
-	CautionBar->SetPercent(ShooterCharacterRef->GetCautionBarPercent());
-}
+//void UCautionBarWidget::SetCautionBarPercent()
+//{
+//	ShooterCharacterRef = Cast<AShooterCharacter>(this->GetOwningPlayer()->GetPawn());
+//	CautionBar->SetPercent(ShooterCharacterRef->GetCautionBarPercent());
+//}

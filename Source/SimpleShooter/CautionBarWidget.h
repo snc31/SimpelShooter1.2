@@ -15,13 +15,14 @@ class SIMPLESHOOTER_API UCautionBarWidget : public UUserWidget
 	GENERATED_BODY()
 
 protected:
+
+public:
+	//void SetCautionBarPercent();
+	//class AShooterCharacter* ShooterCharacterRef;
+
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UProgressBar* CautionBar;
 
 	UPROPERTY(BlueprintReadWrite, meta = (BindWidget))
 	class UCanvasPanel* CautionBarCanvas;
-
-public:
-	void SetCautionBarPercent();
-	class AShooterCharacter* ShooterCharacterRef;
 };
