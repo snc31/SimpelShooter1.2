@@ -5,7 +5,7 @@
 #include "BehaviorTree/BlackboardComponent.h"
 #include "BehaviorTree/BTTaskNode.h"
 #include "Blueprint/UserWidget.h"
-#include "Components/CapsuleComponent.h"
+#include "CautionBarWidget.h"
 #include "Components/SceneComponent.h"
 #include "Components/WidgetComponent.h"
 #include "Engine/World.h"
@@ -13,6 +13,7 @@
 #include "ShooterAIController.h"
 #include "ShooterCharacter.h"
 #include "TimerManager.h"
+
 
 UBTTask_ShowAndIcreaseCautionBar::UBTTask_ShowAndIcreaseCautionBar()
 {
@@ -30,11 +31,12 @@ void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& Ow
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
-	CautionBarWidgetRef = ControlledCharacter->CautionBarWidget;
+	CautionBarWidgetComponentRef = ControlledCharacter->CautionBarWidget;
+	//CautionBarWidgetRef = Cast<UCautionBarWidget>(CautionBarWidgetComponentRef->GetWidget());
 
-	if (CautionBarWidgetRef != nullptr)
+	if (CautionBarWidgetComponentRef != nullptr)
 	{
-		CautionBarWidgetRef->SetHiddenInGame(false);
+		CautionBarWidgetComponentRef->SetHiddenInGame(false);
 	}
 }
 
@@ -42,20 +44,25 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
-	float CautionBarPercent = ControlledCharacter->CautionBarValue;
-	if (CautionBarPercent < ControlledCharacter->MaxCautionBarValue)
+	float CautionBarPercent = ControlledCharacter->GetCautionBarPercent();
+
+	if (ControlledCharacter->CautionBarValue < ControlledCharacter->MaxCautionBarValue)
 	{
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, 0.2f, false, 0.2f);
 		ControlledCharacter->IncreaseCautionBarValue();
-		ControlledCharacter->GetCautionBarPercent(); /////////////////////
-		UE_LOG(LogTemp, Warning, TEXT("Caution Bar Value: %f"), ControlledCharacter->CautionBarValue);
+		CautionBarWidgetComponentRef = ControlledCharacter->CautionBarWidget;
+		CautionBarWidgetRef = Cast<UCautionBarWidget>(CautionBarWidgetComponentRef->GetWidget());
+		CautionBarWidgetRef->SetCautionBarPercent();
+		UE_LOG(LogTemp, Warning, TEXT("Caution Bar Value: %f"), ControlledCharacter->IncreaseCautionBarValue())
 	}
-	else if (CautionBarPercent >= ControlledCharacter->MaxCautionBarValue)
+	else if (ControlledCharacter->CautionBarValue >= ControlledCharacter->MaxCautionBarValue)
 	{
-		//Change Caution Bar to red
+		//Make caution bar red
 		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true);
 	}
-	//decrease if can't see player
+}
+	//Decrease if can't see player
+
+	//Hide if bar reaches 0
 
 	//Remove caution bar from screen if AI dead
-}

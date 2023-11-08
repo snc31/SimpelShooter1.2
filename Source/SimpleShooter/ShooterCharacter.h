@@ -57,6 +57,9 @@ public:
 	UPROPERTY(EditAnywhere, Category = TargetPoints)
 	TArray<AActor*> TargetPoints; //Array of target points for the AI enemies to have listed. 
 
+	//UPROPERTY(EditAnywhere, Category = CautionBar)
+	//class UProgressBar* CautionProgressBar;
+
 	UPROPERTY(EditAnywhere, Category = TargetPoints)
 	bool bLooping = true; //For futurre implementation of how the patrol points work, looping = after last point is reached, go back to the beginning, non looping (reveresed) is doing the patrol points in the reverse order.
 
@@ -70,11 +73,11 @@ public:
 
 	void Shoot();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere) //BlueprintReadWrite
 	class UWidgetComponent* CautionBarWidget;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
-	float CautionBarValue = 0.f;
+	float CautionBarValue = 1.f;
 
 	UPROPERTY(VisibleAnywhere, Category = "CautionBar")
 	float MaxCautionBarValue = 100.f;

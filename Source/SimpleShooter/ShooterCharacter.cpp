@@ -4,6 +4,7 @@
 #include "ShooterCharacter.h"
 #include "Components/CapsuleComponent.h"
 #include "Components/InputComponent.h"
+#include "Components/ProgressBar.h"
 #include "Components/WidgetComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "EnhancedInputComponent.h"
@@ -85,8 +86,7 @@ float AShooterCharacter::GetCautionBarPercent()
 
 float AShooterCharacter::IncreaseCautionBarValue()
 {
-	CautionBarValue++;
-	return CautionBarValue;
+	return CautionBarValue++;
 }
 
 // Called every frame
@@ -107,7 +107,6 @@ void AShooterCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCo
 		EnchancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
 		EnchancedInputComponent->BindAction(PullTrigger, ETriggerEvent::Triggered, this, &AShooterCharacter::Shoot);
 	}
-
 }
 
 float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& DamageEvent, AController* EventInstigator, AActor* DamageCauser)
@@ -115,7 +114,7 @@ float AShooterCharacter::TakeDamage(float DamageAmount, FDamageEvent const& Dama
 	float DamageToApply = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
 	DamageToApply = FMath::Min(Health, DamageToApply);
 	Health -= DamageToApply;
-	UE_LOG(LogTemp, Error, TEXT("Health left =  %f"), Health);
+	//UE_LOG(LogTemp, Error, TEXT("Health left =  %f"), Health);
 	if (IsDead())
 	{
 		ASimpleShooterGameModeBase* GameMode = GetWorld()->GetAuthGameMode<ASimpleShooterGameModeBase>();
