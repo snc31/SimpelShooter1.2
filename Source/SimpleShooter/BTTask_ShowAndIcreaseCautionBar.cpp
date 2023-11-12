@@ -24,7 +24,7 @@ UBTTask_ShowAndIcreaseCautionBar::UBTTask_ShowAndIcreaseCautionBar()
 EBTNodeResult::Type UBTTask_ShowAndIcreaseCautionBar::ExecuteTask(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory)
 {
 	ShowCautionBar(OwnerComp);
-	IncreaseCautionBarValue(OwnerComp);
+	HandleCautionBarValue(OwnerComp);
 	return EBTNodeResult::Succeeded;
 }
 
@@ -41,13 +41,14 @@ void UBTTask_ShowAndIcreaseCautionBar::ShowCautionBar(UBehaviorTreeComponent& Ow
 	}
 }
 
-void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComponent& OwnerComp)
+void UBTTask_ShowAndIcreaseCautionBar::HandleCautionBarValue(UBehaviorTreeComponent& OwnerComp)
 {
 	AAIController* OwnerController = OwnerComp.GetAIOwner(); //get the AI controller thats connected to the behaviour tree
 	AShooterCharacter* ControlledCharacter = Cast<AShooterCharacter>(OwnerController->GetPawn()); //Cast to the shooter character type and get the pawn enemy.
 	float CautionBarPercent = ControlledCharacter->GetCautionBarPercent(); //Store the float percent that is returned from shootercharacter.cpp
 	CautionBarWidgetComponentRef = ControlledCharacter->CautionBarWidget; //Get a reference to the widget component
 	CautionBarWidgetRef = Cast<UCautionBarWidget>(CautionBarWidgetComponentRef->GetWidget()); //Get a reference tot he widget on the widget component
+	//OwnerComp.GetBlackboardComponent()->GetValue;
 
 	if (ControlledCharacter->CautionBarValue < ControlledCharacter->MaxCautionBarValue)
 	{
@@ -62,6 +63,14 @@ void UBTTask_ShowAndIcreaseCautionBar::IncreaseCautionBarValue(UBehaviorTreeComp
 		CautionBarWidgetComponentRef->SetHiddenInGame(true); //Hide caution bar from view
 		OwnerComp.GetBlackboardComponent()->SetValueAsBool(GetSelectedBlackboardKey(), true); //set balckboard key IsCautionBarFull? to true
 	}
+	//else if (ControlledCharacter->CautionBarValue < ControlledCharacter->MaxCautionBarValue && )
+	//{
+
+	//}
+	//else if (ControlledCharacter->IsDead()) //||  ControlledCharacter->GetCautionBarPercent()
+	//{
+	//	CautionBarWidgetComponentRef->SetHiddenInGame(true);
+	//}
 }
 	//Decrease if can't see player and under max cuation bar value
 

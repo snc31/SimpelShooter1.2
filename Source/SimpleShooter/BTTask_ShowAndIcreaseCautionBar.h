@@ -22,7 +22,7 @@ protected:
 
 private:
 	void ShowCautionBar(UBehaviorTreeComponent& OwnerComp);
-	void IncreaseCautionBarValue(UBehaviorTreeComponent& OwnerComp);
+	void HandleCautionBarValue(UBehaviorTreeComponent& OwnerComp);
 	class UWidgetComponent* CautionBarWidgetComponentRef;
 	TArray<USceneComponent>* AIComponents;
 	FTimerHandle TimerHandle;
